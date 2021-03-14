@@ -1,3 +1,4 @@
+# Juan Arturo Cruz Cardona - A01701804
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,8 +26,7 @@ def propagate(w, b, X, Y):
     dw = 1/m * np.dot(X, (A-Y).T)
     db = 1/m * np.sum(A-Y)
         
-    grads = {"dw": dw,
-            "db": db}
+    grads = {"dw": dw, "db": db}
     return grads, cost
 
 def optimize(w, b, X, Y, num_iterations, learning_rate):
