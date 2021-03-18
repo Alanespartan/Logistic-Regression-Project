@@ -136,5 +136,5 @@ plt.title('Scatter Plot of Cost Functions', fontsize=18)
 plt.ylabel('Costs', fontsize=12)
 plt.show()
 
-#plt.imshow(np.array(df_x.iloc[500, :]).reshape(20,20))
-#plt.show()
+plt.imshow(np.array(df_x.iloc[500, :]).reshape(20,20))
+plt.show()
