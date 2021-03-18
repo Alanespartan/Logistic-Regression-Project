@@ -73,7 +73,7 @@ def predict(w, b, X):
         
     return Y_prediction
 
-def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
+def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate, userrange):
     #Initializing the w and b as zeros
     w, b = initialize_with_zeros(X_train.shape[0])
     
@@ -85,13 +85,15 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
     # Predicting the output for both test and training set 
     Y_prediction_test = predict(w, b, X_test)
     Y_prediction_train = predict(w, b, X_train)
+    
+    prediction = predict(w, b, userrange)
+    print(np.mean(np.abs(prediction)))
         
     #Calculating the training and test set accuracy by comparing
     #the predicted output and the original output
-    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
-    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+    #print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+    #print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
     
-  
     d = {"costs": costs,
          "Y_prediction_test": Y_prediction_test, 
          "Y_prediction_train" : Y_prediction_train, 
@@ -125,9 +127,12 @@ y_test = y.iloc[4000:].T
 y_train = np.array(y_train)
 y_test = np.array(y_test)
 
+userrange1 = df_x.iloc[3200: 3700].T
+userrange2 = np.array(userrange1)
+
 ni = 2000 # num iterations 
 lr = 0.015 # learning rate
-d = model(x_train, y_train, x_test, y_test, ni, lr)
+d = model(x_train, y_train, x_test, y_test, ni, lr, userrange2)
 
 #Plot how cost function changed each updated w's and b's
 plt.figure(figsize=(7,5))
@@ -136,5 +141,5 @@ plt.title('Scatter Plot of Cost Functions', fontsize=18)
 plt.ylabel('Costs', fontsize=12)
 plt.show()
 
-plt.imshow(np.array(df_x.iloc[500, :]).reshape(20,20))
-plt.show()
+#plt.imshow(np.array(df_x.iloc[500, :]).reshape(20,20))
+#plt.show()
